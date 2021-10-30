@@ -92,19 +92,21 @@ def dist(s, t, split_words=True, case_sensitive=True, deletion_cost=1, insertion
                 md_s += f'{value}' + separator
                 md_t += f'{value}' + separator
         elif op == Operation.INSERTION:
-                md_t += f'{value}' + separator
+                md_t += f'<{value}>' + separator
         elif op == Operation.DELETION:
-                md_s += f'{value}' + separator
+                md_s += f'<{value}>' + separator
 
     with open('out.md', 'w+') as outfile:
         outfile.write(f'{md_s}\n\n')
         outfile.write(f'{md_t}\n\n')
 
+    print(md_s)
+    print(md_t)
+
     return d[m-1, n-1]
 
 
 def main(s, t, split_words, case_sensitive):
-    print(f'{s} {t}')
     result = dist(s, t, split_words, case_sensitive, 1, 1, 1)
     print(f'Minimum edit distance: {result}')
 
